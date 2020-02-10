@@ -5,7 +5,7 @@ import ui.Util;
 import java.util.ArrayList;
 import java.util.List;
 
-// represents a list of flash cards
+// represents a flash card manager that contains a list of flash cards
 public class FlashCardManager {
     private List<FlashCard> flashCardList;
 

@@ -2,6 +2,7 @@ package ui;
 
 import java.io.IOException;
 
+// Helper functions
 public class Util {
     // EFFECTS: prints out a prompt followed by a new line and  "> "
     public static void displayInputPrompt(String prompt) {

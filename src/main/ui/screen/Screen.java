@@ -5,6 +5,7 @@ import ui.App;
 
 import java.util.Scanner;
 
+// represents a general screen class
 public abstract class Screen {
     // STATIC SCREEN CONSTANTS
     public static final int MAIN_SCREEN = 0;

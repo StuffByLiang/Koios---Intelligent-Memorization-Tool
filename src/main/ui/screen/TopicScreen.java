@@ -6,6 +6,7 @@ import model.Topic;
 import ui.App;
 import ui.Util;
 
+// this screen shows all the actions you can do with a topic
 public class TopicScreen extends Screen {
     private Topic topic;
 

@@ -5,6 +5,7 @@ import model.Tester;
 import ui.App;
 import ui.Util;
 
+// screen that allows user to test themselves
 public class TestScreen extends Screen {
     Tester tester;
 

@@ -1,5 +1,6 @@
 package model;
 
+// represents a class that can contains information needed to remember a testing session
 public class Tester {
     private FlashCardManager fcm;
     private int currentFlashCard;

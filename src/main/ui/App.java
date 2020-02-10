@@ -11,6 +11,7 @@ import ui.screen.TopicScreen;
 
 import java.util.Scanner;
 
+// Koios Application
 public class App {
     private int screen;
     private int topicId;

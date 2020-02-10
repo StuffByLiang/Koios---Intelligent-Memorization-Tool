@@ -5,7 +5,7 @@ import ui.Util;
 import java.util.ArrayList;
 import java.util.List;
 
-// represents a list of topics
+// represents a topic manager that contains a list of topics
 public class TopicManager {
     private List<Topic> topicList;
 

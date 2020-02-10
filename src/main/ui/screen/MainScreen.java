@@ -4,6 +4,7 @@ import model.Topic;
 import ui.App;
 import ui.Util;
 
+// main screen the program starts with
 public class MainScreen extends Screen {
     // EFFECTS: constructs a main screen
     public MainScreen(App app) {
