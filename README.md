@@ -8,4 +8,9 @@
 
 ## Why this project interests me
 This project is of interest to me because I find quizlet's progress tracking completely useless, and their flashcard creation system is boring. Also because I need to study for my upcoming midterms.
- 
+
+## User Stories
+- As a user, I want to be able to add a flashcard to my collection of flash cards for a topic
+- As a user, I want to be able to edit a flashcard in my collection
+- As a user, I want to be able to view flashcards in my collection and be tested on them
+- As a user, I want to be able to view my progress on memorizing my flashcards, for example, 50% of flashcards have been memorized, or you have received 79% for this session, an increase of 15% from last time.
