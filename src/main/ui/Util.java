@@ -20,7 +20,7 @@ public class Util {
     }
 
     // EFFECTS: waits for user to press key before program continues
-    public static void pause() {
+    public static void pressAnyKeyToContinue() {
         System.out.println("Press enter to continue...");
         try {
             System.in.read();

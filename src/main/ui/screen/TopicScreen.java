@@ -9,18 +9,22 @@ import ui.Util;
 public class TopicScreen extends Screen {
     private Topic topic;
 
+    // EFFECTS: constructs a topic screen
     public TopicScreen(App app) {
         super(app);
     }
 
+    // EFFECTS: Gets the current topic
     private Topic getTopic() {
         return topicManager.getTopic(app.getTopicId());
     }
 
+    // EFFECTS: gets the current flash card manager for the current topic
     private FlashCardManager getFlashCardManager() {
         return topicManager.getFlashCardManager(app.getTopicId());
     }
 
+    // EFFECTS: displays the topic menu
     @Override
     public void display() {
         System.out.println("\nSelect an option: ");
@@ -33,6 +37,8 @@ public class TopicScreen extends Screen {
         System.out.println("\tq) Quit Program");
     }
 
+    // MODIFIES: this
+    // EFFECTS: processes user input
     @Override
     public void processCommand(String command) {
         switch (command) {
@@ -57,10 +63,13 @@ public class TopicScreen extends Screen {
         }
     }
 
+    // EFFECTS: switches screen to the testing screen
     private void beginTest() {
-
+        app.setScreen(TEST_SCREEN);
     }
 
+    // MODIFIES: this
+    // EFFECTS: adds a flash card from user input to the current topic
     private void addFlashCard() {
         Util.displayInputPrompt("What goes on the front side?");
         String frontSide = input.nextLine();
@@ -71,6 +80,8 @@ public class TopicScreen extends Screen {
         flashCardManager.addFlashCard(new FlashCard(frontSide, backSide));
     }
 
+    // MODIFIES: this
+    // EFFECTS: deletes a flash card from user input to the current topic
     private void deleteFlashCard() {
         FlashCardManager flashCardManager = getFlashCardManager();
         for (int i = 0; i < flashCardManager.size(); i++) {
@@ -97,6 +108,7 @@ public class TopicScreen extends Screen {
         }
     }
 
+    // EFFECTS: views all flash cards from the current topic
     private void viewFlashCard() {
         FlashCardManager flashCardManager = getFlashCardManager();
         for (int i = 0; i < flashCardManager.size(); i++) {
@@ -105,10 +117,12 @@ public class TopicScreen extends Screen {
             String backSide = fc.getBackSide();
             System.out.println(String.format("\t%d) %s | %s", i + 1, frontSide, backSide));
         }
-        Util.pause();
+        Util.pressAnyKeyToContinue();
     }
 
 
+    // MODIFIES: this
+    // EFFECTS: deletes the current topic
     private void deleteTopic() {
         boolean loop = true;
 

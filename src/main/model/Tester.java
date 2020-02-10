@@ -19,7 +19,8 @@ public class Tester {
     // EFFECTS: returns true if answer matches the backside of current card,
     //          goes to the next card, and increments the num of right answer by one
     public boolean isRightAnswer(String answer) {
-        if (answer.equals(getBackSide())) {
+        answer = answer.toLowerCase();
+        if (answer.equals(getBackSide().toLowerCase())) {
             currentFlashCard++;
             numRightAnswers++;
             return true;
