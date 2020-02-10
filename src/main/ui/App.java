@@ -1,18 +1,24 @@
 package ui;
 
+import model.FlashCard;
+import model.FlashCardManager;
+import model.Topic;
 import model.TopicManager;
+import ui.screen.MainScreen;
+import ui.screen.Screen;
+import ui.screen.TopicScreen;
 
 import java.util.Scanner;
 
 public class App {
-    private static final int MAIN_SCREEN = 0;
-//    private static final int MAIN_SCREEN = 0;
-//    private static final int MAIN_SCREEN = 0;
-
+    private int screen;
+    private int topicId;
     private TopicManager topicManager;
-    private Scanner input;
 
-    private int screenState = 0;
+    private Screen mainScreen;
+    private Screen topicScreen;
+
+    private Scanner input;
 
     // EFFECTS: Runs the application
     public App() {
@@ -21,19 +27,66 @@ public class App {
     }
 
     private void init() {
+        screen = Screen.MAIN_SCREEN;
         topicManager = new TopicManager();
+
+        Topic biology = new Topic("Biology");
+        FlashCardManager fcl = biology.getFlashCardManager();
+        fcl.addFlashCard(new FlashCard("1+1", "2"));
+        fcl.addFlashCard(new FlashCard("2+2", "3"));
+        fcl.addFlashCard(new FlashCard("4+4", "8"));
+        topicManager.addTopic(biology);
+
         input = new Scanner(System.in);
+
+        mainScreen = new MainScreen(this);
+        topicScreen = new TopicScreen(this);
     }
 
     private void runApp() {
-        displayMainMenu();
+        String command = "";
+        do {
+            //System.out.println(screen);
+            display(getCurrentScreen());
+            Util.displayInputPrompt();
+            command = input.nextLine().toLowerCase();
+
+            processCommand(getCurrentScreen(), command);
+        } while (!command.equals("q"));
     }
 
-    private void displayMainMenu() {
+    private void display(Screen screen) {
+        screen.display();
+    }
 
-        System.out.println("\nSelect a Topic: ");
+    private void processCommand(Screen screen, String command) {
+        screen.processCommand(command);
+    }
 
-        System.out.println("\tc) Create a topic");
-        System.out.println("\tq) Quit Program");
+    public void setScreen(int screen) {
+        this.screen = screen;
+    }
+
+    public void setTopicId(int topicId) {
+        this.topicId = topicId;
+    }
+
+    private Screen getCurrentScreen() {
+        switch (screen) {
+            case Screen.MAIN_SCREEN:
+                return mainScreen;
+            case Screen.TOPIC_SCREEN:
+                return topicScreen;
+            default:
+                return mainScreen;
+        }
+    }
+
+    public TopicManager getTopicManager() {
+        return topicManager;
+    }
+
+    public int getTopicId() {
+        return topicId;
     }
 }

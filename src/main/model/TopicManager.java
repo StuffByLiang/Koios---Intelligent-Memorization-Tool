@@ -1,5 +1,7 @@
 package model;
 
+import ui.Util;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -14,6 +16,12 @@ public class TopicManager {
 
     public List<Topic> getTopicList() {
         return topicList;
+    }
+
+    // REQUIRES: topic must be in list
+    // EFFECTS: returns the flash card manager for the specified topic id
+    public FlashCardManager getFlashCardManager(int topicId) {
+        return getTopic(topicId).getFlashCardManager();
     }
 
     /* MODIFIES: this
@@ -47,5 +55,20 @@ public class TopicManager {
     // EFFECTS: returns size of the list
     public int size() {
         return topicList.size();
+    }
+
+    // EFFECTS: returns true if given topic id is in the list (zero based)
+    public boolean isValidId(int id) {
+        return id >= 0 && id < size();
+    }
+
+    // EFFECTS: returns true if given topic id is in the list (ones based)
+    public boolean isValidId(String id) {
+        if (!Util.isNum(id)) {
+            return false;
+        } else {
+            int num = Integer.parseInt(id);
+            return num >= 1 && num <= size();
+        }
     }
 }

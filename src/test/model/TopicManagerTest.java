@@ -57,4 +57,30 @@ public class TopicManagerTest {
         topicManager.removeTopic(0);
         assertEquals(2, topicManager.size());
     }
+
+    @Test
+    public void testIsValidId() {
+        checkSetup();
+        assertTrue(topicManager.isValidId(0));
+        assertTrue(topicManager.isValidId(1));
+        assertTrue(topicManager.isValidId(2));
+        assertFalse(topicManager.isValidId(-1));
+        assertFalse(topicManager.isValidId(3));
+    }
+
+    @Test
+    public void testIsValidIdString() {
+        checkSetup();
+        assertTrue(topicManager.isValidId("1"));
+        assertTrue(topicManager.isValidId("2"));
+        assertTrue(topicManager.isValidId("3"));
+        assertFalse(topicManager.isValidId("0"));
+        assertFalse(topicManager.isValidId("4"));
+        assertFalse(topicManager.isValidId("yo moma"));
+    }
+
+    @Test
+    public void testGetFlashCardManager() {
+        assertEquals(0, topicManager.getFlashCardManager(0).size());
+    }
 }

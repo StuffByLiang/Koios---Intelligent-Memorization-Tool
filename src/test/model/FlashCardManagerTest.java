@@ -63,4 +63,25 @@ public class FlashCardManagerTest {
         fcl.removeFlashCard(0);
         assertEquals(2, fcl.size());
     }
+
+    @Test
+    public void testIsValidId() {
+        checkSetup();
+        assertTrue(fcl.isValidId(0));
+        assertTrue(fcl.isValidId(1));
+        assertTrue(fcl.isValidId(2));
+        assertFalse(fcl.isValidId(-1));
+        assertFalse(fcl.isValidId(3));
+    }
+
+    @Test
+    public void testIsValidIdString() {
+        checkSetup();
+        assertTrue(fcl.isValidId("1"));
+        assertTrue(fcl.isValidId("2"));
+        assertTrue(fcl.isValidId("3"));
+        assertFalse(fcl.isValidId("0"));
+        assertFalse(fcl.isValidId("4"));
+        assertFalse(fcl.isValidId("yo moma"));
+    }
 }

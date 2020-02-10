@@ -1,5 +1,7 @@
 package model;
 
+import ui.Util;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -51,5 +53,20 @@ public class FlashCardManager {
     // EFFECTS: returns size of the list
     public int size() {
         return flashCardList.size();
+    }
+
+    // EFFECTS: returns true if given flashcard id is in the list (zeros based)
+    public boolean isValidId(int id) {
+        return id >= 0 && id < size();
+    }
+
+    // EFFECTS: returns true if given flashcard id is in the list (ones based)
+    public boolean isValidId(String id) {
+        if (!Util.isNum(id)) {
+            return false;
+        } else {
+            int num = Integer.parseInt(id);
+            return num >= 1 && num <= size();
+        }
     }
 }
