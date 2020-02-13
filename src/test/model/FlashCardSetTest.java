@@ -5,8 +5,8 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-public class FlashCardManagerTest {
-    FlashCardManager fcl;
+public class FlashCardSetTest {
+    FlashCardSet fcl;
 
     private FlashCard createFlashCard(String frontSide, String backSide) {
         return new FlashCard(frontSide, backSide);
@@ -23,7 +23,7 @@ public class FlashCardManagerTest {
 
     @BeforeEach
     public void setup() {
-        fcl = new FlashCardManager();
+        fcl = new FlashCardSet();
         fcl.addFlashCard(createFlashCard("1+1", "2"));
         fcl.addFlashCard(createFlashCard("2+2", "3"));
         fcl.addFlashCard(createFlashCard("4+4", "8"));
@@ -31,7 +31,7 @@ public class FlashCardManagerTest {
 
     @Test
     public void testConstructor() {
-        fcl = new FlashCardManager();
+        fcl = new FlashCardSet();
         assertEquals(0, fcl.size());
     }
 

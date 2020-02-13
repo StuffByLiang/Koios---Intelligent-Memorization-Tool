@@ -6,11 +6,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 // represents a flash card manager that contains a list of flash cards
-public class FlashCardManager {
+public class FlashCardSet {
     private List<FlashCard> flashCardList;
 
     // EFFECTS: creates an empty list of flash cards
-    public FlashCardManager() {
+    public FlashCardSet() {
         flashCardList = new ArrayList<>();
     }
 

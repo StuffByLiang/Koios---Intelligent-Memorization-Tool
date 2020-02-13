@@ -20,8 +20,8 @@ public class TopicManager {
 
     // REQUIRES: topic must be in list
     // EFFECTS: returns the flash card manager for the specified topic id
-    public FlashCardManager getFlashCardManager(int topicId) {
-        return getTopic(topicId).getFlashCardManager();
+    public FlashCardSet getFlashCardManager(int topicId) {
+        return getTopic(topicId).getFlashCardSet();
     }
 
     /* MODIFIES: this

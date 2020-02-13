@@ -1,6 +1,6 @@
 package ui.screen;
 
-import model.FlashCardManager;
+import model.FlashCardSet;
 import model.Tester;
 import ui.App;
 import ui.Util;
@@ -18,7 +18,7 @@ public class TestScreen extends Screen {
     // EFFECTS: this method runs when the app screen is changed to this screen
     @Override
     public void init() {
-        FlashCardManager fcm = app.getTopicManager().getFlashCardManager(app.getTopicId());
+        FlashCardSet fcm = app.getTopicManager().getFlashCardManager(app.getTopicId());
         tester = new Tester(fcm);
     }
 

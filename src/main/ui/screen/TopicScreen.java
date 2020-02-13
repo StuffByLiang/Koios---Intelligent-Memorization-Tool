@@ -1,7 +1,7 @@
 package ui.screen;
 
 import model.FlashCard;
-import model.FlashCardManager;
+import model.FlashCardSet;
 import model.Topic;
 import ui.App;
 import ui.Util;
@@ -21,7 +21,7 @@ public class TopicScreen extends Screen {
     }
 
     // EFFECTS: gets the current flash card manager for the current topic
-    private FlashCardManager getFlashCardManager() {
+    private FlashCardSet getFlashCardManager() {
         return topicManager.getFlashCardManager(app.getTopicId());
     }
 
@@ -77,16 +77,16 @@ public class TopicScreen extends Screen {
         Util.displayInputPrompt("What goes on the back side?");
         String backSide = input.nextLine();
 
-        FlashCardManager flashCardManager = getFlashCardManager();
-        flashCardManager.addFlashCard(new FlashCard(frontSide, backSide));
+        FlashCardSet flashCardSet = getFlashCardManager();
+        flashCardSet.addFlashCard(new FlashCard(frontSide, backSide));
     }
 
     // MODIFIES: this
     // EFFECTS: deletes a flash card from user input to the current topic
     private void deleteFlashCard() {
-        FlashCardManager flashCardManager = getFlashCardManager();
-        for (int i = 0; i < flashCardManager.size(); i++) {
-            FlashCard fc = flashCardManager.getFlashCard(i);
+        FlashCardSet flashCardSet = getFlashCardManager();
+        for (int i = 0; i < flashCardSet.size(); i++) {
+            FlashCard fc = flashCardSet.getFlashCard(i);
             String frontSide = fc.getFrontSide();
             String backSide = fc.getBackSide();
             System.out.println(String.format("\t%d) %s | %s", i + 1, frontSide, backSide));
@@ -102,8 +102,8 @@ public class TopicScreen extends Screen {
 
             if (command == 0) {
                 loop = false;
-            } else if (flashCardManager.isValidId(id)) {
-                flashCardManager.removeFlashCard(id);
+            } else if (flashCardSet.isValidId(id)) {
+                flashCardSet.removeFlashCard(id);
                 loop = false;
             }
         }
@@ -111,9 +111,9 @@ public class TopicScreen extends Screen {
 
     // EFFECTS: views all flash cards from the current topic
     private void viewFlashCard() {
-        FlashCardManager flashCardManager = getFlashCardManager();
-        for (int i = 0; i < flashCardManager.size(); i++) {
-            FlashCard fc = flashCardManager.getFlashCard(i);
+        FlashCardSet flashCardSet = getFlashCardManager();
+        for (int i = 0; i < flashCardSet.size(); i++) {
+            FlashCard fc = flashCardSet.getFlashCard(i);
             String frontSide = fc.getFrontSide();
             String backSide = fc.getBackSide();
             System.out.println(String.format("\t%d) %s | %s", i + 1, frontSide, backSide));

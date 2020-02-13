@@ -14,7 +14,7 @@ public class TesterTest {
 
     @BeforeEach
     public void setup() {
-        FlashCardManager fcm = new FlashCardManager();
+        FlashCardSet fcm = new FlashCardSet();
         fcm.addFlashCard(createFlashCard("1+1", "2"));
         fcm.addFlashCard(createFlashCard("2+2", "3"));
         fcm.addFlashCard(createFlashCard("4+4", "8"));

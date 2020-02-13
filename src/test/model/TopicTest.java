@@ -12,6 +12,6 @@ public class TopicTest {
     public void testConstructor() {
         topic = new Topic("Biology");
         assertEquals("Biology", topic.getName());
-        assertEquals(0, topic.getFlashCardManager().size());
+        assertEquals(0, topic.getFlashCardSet().size());
     }
 }

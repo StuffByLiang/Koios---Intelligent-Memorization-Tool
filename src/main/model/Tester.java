@@ -2,13 +2,13 @@ package model;
 
 // represents a class that can contains information needed to remember a testing session
 public class Tester {
-    private FlashCardManager fcm;
+    private FlashCardSet fcm;
     private int currentFlashCard;
     private int numRightAnswers;
     private int totalCards;
 
     // EFFECTS: constructs a new tester with a specified set of flash cards
-    public Tester(FlashCardManager fcm) {
+    public Tester(FlashCardSet fcm) {
         this.fcm = fcm;
         currentFlashCard = 0;
         numRightAnswers = 0;

@@ -3,16 +3,16 @@ package model;
 // represents a topic that contains flash cards
 public class Topic {
     private String name;
-    private FlashCardManager flashCardManager;
+    private FlashCardSet flashCardSet;
 
     // EFFECTS: creates a new topic with a name and empty list of flashcards
     public Topic(String name) {
         this.name = name;
-        flashCardManager = new FlashCardManager();
+        flashCardSet = new FlashCardSet();
     }
 
-    public FlashCardManager getFlashCardManager() {
-        return flashCardManager;
+    public FlashCardSet getFlashCardSet() {
+        return flashCardSet;
     }
 
     public String getName() {

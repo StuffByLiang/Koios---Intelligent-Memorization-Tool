@@ -1,7 +1,7 @@
 package ui;
 
 import model.FlashCard;
-import model.FlashCardManager;
+import model.FlashCardSet;
 import model.Topic;
 import model.TopicManager;
 import ui.screen.MainScreen;
@@ -36,7 +36,7 @@ public class App {
         topicManager = new TopicManager();
 
         Topic biology = new Topic("Biology");
-        FlashCardManager fcl = biology.getFlashCardManager();
+        FlashCardSet fcl = biology.getFlashCardSet();
         fcl.addFlashCard(new FlashCard("1+1", "2"));
         fcl.addFlashCard(new FlashCard("2+2", "3"));
         fcl.addFlashCard(new FlashCard("4+4", "8"));
