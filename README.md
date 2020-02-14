@@ -14,3 +14,7 @@ This project is of interest to me because I find quizlet's progress tracking com
 - As a user, I want to be able to be tested on flashcards in my collection and view my score
 - As a user, I want to be able to view flashcards in my collection
 - As a user, I want to be able to add/delete/view different topics so I can separate my flash cards.
+
+Phase 2
+- As a user, I want to be able to save all topics and flash cards automatically when I quit the program
+- As a user, I want to be able to load all topics and flash cards automatically when I start the program
