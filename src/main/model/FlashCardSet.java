@@ -2,11 +2,13 @@ package model;
 
 import ui.Util;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
 // represents a flash card manager that contains a list of flash cards
-public class FlashCardSet {
+public class FlashCardSet implements Serializable {
+    private static final long serialVersionUID = 3L;
     private List<FlashCard> flashCardList;
 
     // EFFECTS: creates an empty list of flash cards

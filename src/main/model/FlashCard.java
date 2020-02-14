@@ -1,7 +1,10 @@
 package model;
 
+import java.io.Serializable;
+
 // Represents a flashcard, which has a frontside and a backside
-public class FlashCard {
+public class FlashCard implements Serializable {
+    private static final long serialVersionUID = 4L;
     private String frontSide;
     private String backSide;
 

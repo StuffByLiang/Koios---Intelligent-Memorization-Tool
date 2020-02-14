@@ -1,14 +1,14 @@
 package ui;
 
-import model.FlashCard;
-import model.FlashCardSet;
-import model.Topic;
 import model.TopicManager;
+import persistence.Saver;
 import ui.screen.MainScreen;
 import ui.screen.Screen;
 import ui.screen.TestScreen;
 import ui.screen.TopicScreen;
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.Scanner;
 
 // Koios Application
@@ -33,22 +33,14 @@ public class App {
     // EFFECTS: initializes fields & some flash cards
     private void init() {
         screen = Screen.MAIN_SCREEN;
-        topicManager = new TopicManager();
-
-        Topic biology = new Topic("Biology");
-        FlashCardSet fcl = biology.getFlashCardSet();
-        fcl.addFlashCard(new FlashCard("1+1", "2"));
-        fcl.addFlashCard(new FlashCard("2+2", "3"));
-        fcl.addFlashCard(new FlashCard("4+4", "8"));
-        fcl.addFlashCard(new FlashCard("What is the powerhouse of the cell?", "mitochondria"));
-        fcl.addFlashCard(new FlashCard("What is the scientific name of humans", "homo sapiens"));
-        topicManager.addTopic(biology);
 
         input = new Scanner(System.in);
 
         mainScreen = new MainScreen(this);
         topicScreen = new TopicScreen(this);
         testScreen = new TestScreen(this);
+
+        load();
     }
 
     // EFFECTS: Runs the application
@@ -63,6 +55,8 @@ public class App {
 
             processCommand(getCurrentScreen(), command);
         } while (!command.equals("q"));
+
+        save();
     }
 
     // EFFECTS: runs the given screen's runBeforeDisplay method
@@ -115,5 +109,33 @@ public class App {
 
     public int getTopicId() {
         return topicId;
+    }
+
+    // MODIFIES: this
+    // EFFECTS: loads topicManager from data.txt
+    public void load() {
+        topicManager = new TopicManager();
+        try {
+            topicManager = Saver.load("data.txt");
+        } catch (FileNotFoundException e) {
+            System.out.println("File not found");
+        } catch (IOException e) {
+            System.out.println("Error initializing stream");
+        } catch (ClassNotFoundException e) {
+            System.out.println("Class was not found");
+        }
+        setScreen(Screen.MAIN_SCREEN);
+    }
+
+    // EFFECTS: saves topicManager to data.txt
+    public void save() {
+        try {
+            Saver.save("data.txt", topicManager);
+            System.out.println("saved");
+        } catch (FileNotFoundException e) {
+            System.out.println("File not found");
+        } catch (IOException e) {
+            System.out.println("Error initializing stream");
+        }
     }
 }

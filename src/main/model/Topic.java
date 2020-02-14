@@ -1,7 +1,10 @@
 package model;
 
+import java.io.Serializable;
+
 // represents a topic that contains flash cards
-public class Topic {
+public class Topic implements Serializable {
+    private static final long serialVersionUID = 2L;
     private String name;
     private FlashCardSet flashCardSet;
 

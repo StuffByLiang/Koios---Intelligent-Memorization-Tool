@@ -30,7 +30,9 @@ public abstract class Screen {
     public abstract void processCommand(String command);
 
     // EFFECTS: this method runs when the app screen is changed to this screen
-    public void init() {}
+    public void init() {
+        topicManager = app.getTopicManager();
+    }
 
     // EFFECTS: this method runs before the screen is displayed
     public void runBeforeDisplay() {}

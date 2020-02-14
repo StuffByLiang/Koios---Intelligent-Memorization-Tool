@@ -18,6 +18,7 @@ public class TestScreen extends Screen {
     // EFFECTS: this method runs when the app screen is changed to this screen
     @Override
     public void init() {
+        super.init();
         FlashCardSet fcm = app.getTopicManager().getFlashCardManager(app.getTopicId());
         tester = new Tester(fcm);
     }
