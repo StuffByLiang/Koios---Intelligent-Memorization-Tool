@@ -35,6 +35,11 @@ public class SaverTest {
     }
 
     @Test
+    void testConstructor() {
+        new Saver();
+    }
+
+    @Test
     public void testSaveLoad() {
         TopicManager topicManagerTest = new TopicManager();
         try {
