@@ -1,6 +1,6 @@
 package model;
 
-import ui.Util;
+import ui.console.Util;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -48,10 +48,18 @@ public class TopicManager implements Serializable {
 
     /* REQUIRES: the list of topic must contain the topic
      * MODIFIES: this
-     * EFFECTS: removes a flash card from the list at pos i
+     * EFFECTS: removes a topic from the list at pos i
      */
     public void removeTopic(int i) {
         topicList.remove(i);
+    }
+
+    /* REQUIRES: the list of topic must contain the topic
+     * MODIFIES: this
+     * EFFECTS: removes the topic from the list
+     */
+    public void removeTopic(Topic topic) {
+        topicList.remove(topic);
     }
 
     // EFFECTS: returns size of the list

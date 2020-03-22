@@ -1,141 +1,167 @@
 package ui;
 
+import javafx.scene.Scene;
+import javafx.scene.layout.StackPane;
+import javafx.stage.Stage;
+import model.Topic;
 import model.TopicManager;
 import persistence.Saver;
-import ui.screen.MainScreen;
-import ui.screen.Screen;
-import ui.screen.TestScreen;
-import ui.screen.TopicScreen;
+import ui.controllers.MainController;
+import ui.controllers.TestingController;
+import ui.controllers.TopicController;
+import ui.views.mainview.MainView;
+import ui.views.testview.TestingView;
+import ui.views.topicview.TopicView;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.util.Scanner;
+import java.net.URL;
 
-// Koios Application
+// Manages the app
 public class App {
-    private int screen;
-    private int topicId;
+    public static final int DEFAULT_WIDTH = 650;
+    public static final int DEFAULT_HEIGHT = 568;
+    public static final String TITLE = "Koios - Intelligent FlashCard App";
+
+    public static App instance;
+
+    private final Stage stage;
+    private StackPane root;
+
+    private MainView mainView;
+    private TopicView topicView;
+    private TestingView testingView;
+
     private TopicManager topicManager;
+    private Topic currentTopic;
 
-    private Screen mainScreen;
-    private Screen topicScreen;
-    private Screen testScreen;
+    public enum Screen {
+        MAIN_SCREEN,
+        TOPIC_SCREEN,
+        TESTING_SCREEN
+    }
 
-    private Scanner input;
+    public static App get() {
+        return instance;
+    }
 
-    // EFFECTS: Runs the application
-    public App() {
-        init();
-        runApp();
+    // EFFECTS: creates a new singleton instance
+    public static void init(Stage stage) {
+        instance = new App(stage);
+        instance.show();
+    }
+
+    // EFFECTS: shows the app
+    public void show() {
+        initStage();
+        loadViews();
+        setScreen(Screen.MAIN_SCREEN);
+        stage.setTitle(TITLE);
+        stage.show();
+    }
+
+    // EFFECTS: loads the views
+    private void loadViews() {
+        mainView = new MainView(root);
+        testingView = new TestingView(root);
+        topicView = new TopicView(root);
+    }
+
+    // EFFECTS: initializes the stage
+    private void initStage() {
+        root = new StackPane();
+        Scene scene = new Scene(root, DEFAULT_WIDTH, DEFAULT_HEIGHT);
+        URL resource = getClass().getResource("stylesheet/stylesheet_main.css");
+        scene.getStylesheets().add(String.valueOf(resource));
+        scene.getStylesheets().add("http://fonts.googleapis.com/css?family=Montserrat");
+        stage.setScene(scene);
+    }
+
+    public StackPane getRoot() {
+        return root;
+    }
+
+    // EFFECTS: creates a new app
+    private App(Stage stage) {
+        this.stage = stage;
+        topicManager = new TopicManager();
     }
 
     // MODIFIES: this
-    // EFFECTS: initializes fields & some flash cards
-    private void init() {
-        screen = Screen.MAIN_SCREEN;
-
-        input = new Scanner(System.in);
-
-        mainScreen = new MainScreen(this);
-        topicScreen = new TopicScreen(this);
-        testScreen = new TestScreen(this);
-
-        load();
-    }
-
-    // EFFECTS: Runs the application
-    private void runApp() {
-        String command = "";
-        do {
-            //System.out.println(screen);
-            runBeforeDisplay(getCurrentScreen());
-            display(getCurrentScreen());
-            Util.displayInputPrompt();
-            command = input.nextLine().toLowerCase();
-
-            processCommand(getCurrentScreen(), command);
-        } while (!command.equals("q"));
-
-        save();
-    }
-
-    // EFFECTS: runs the given screen's runBeforeDisplay method
-    private void runBeforeDisplay(Screen screen) {
-        screen.runBeforeDisplay();
-    }
-
-    // EFFECTS: display's the given screen
-    private void display(Screen screen) {
-        screen.display();
-    }
-
-    // EFFECTS: processes user input for a given screen
-    private void processCommand(Screen screen, String command) {
-        screen.processCommand(command);
-    }
-
-    // MODIFIES: this
-    // EFFECTS: sets the current screen and initializes it
-    public void setScreen(int screen) {
-        this.screen = screen;
-        getCurrentScreen().init();
-    }
-
-    // MODIFIES: this
-    // EFFECTS: sets the current topic Id
-    public void setTopicId(int topicId) {
-        this.topicId = topicId;
-    }
-
-    // EFFECTS: returns the current Screen object
-    private Screen getCurrentScreen() {
-        switch (screen) {
-            case Screen.MAIN_SCREEN:
-                return mainScreen;
-            case Screen.TOPIC_SCREEN:
-                return topicScreen;
-            case Screen.TEST_SCREEN:
-                return testScreen;
-            default:
-                return mainScreen;
+    // EFFECTS: loads topicManager from data.txt, and returns result message
+    public String loadTopicManager() {
+        try {
+            topicManager = Saver.load("data.txt");
+            if (currentTopic != null) {
+                getTopicController().renderFlashCards();
+            }
+            getMainController().renderTopics();
+            return "Successfully Loaded!";
+        } catch (FileNotFoundException e) {
+            return "Error: File not found";
+        } catch (IOException e) {
+            return "Error: Problem initializing stream";
+        } catch (ClassNotFoundException e) {
+            return "Error: Class was not found";
         }
     }
 
-    // MODIFIES: this
-    // EFFECTS: sets the current topic Id
+    // EFFECTS: saves topicManager to data.txt, and returns result message
+    public String saveTopicManager() {
+        try {
+            Saver.save("data.txt", topicManager);
+            return "Successfully Saved!";
+        } catch (FileNotFoundException e) {
+            return "Error: File not found";
+        } catch (IOException e) {
+            return "Error: Problem initializing stream";
+        }
+    }
+
     public TopicManager getTopicManager() {
         return topicManager;
     }
 
-    public int getTopicId() {
-        return topicId;
+    public void setTopicManager(TopicManager topicManager) {
+        this.topicManager = topicManager;
     }
 
-    // MODIFIES: this
-    // EFFECTS: loads topicManager from data.txt
-    public void load() {
-        topicManager = new TopicManager();
-        try {
-            topicManager = Saver.load("data.txt");
-        } catch (FileNotFoundException e) {
-            System.out.println("File not found");
-        } catch (IOException e) {
-            System.out.println("Error initializing stream");
-        } catch (ClassNotFoundException e) {
-            System.out.println("Class was not found");
-        }
-        setScreen(Screen.MAIN_SCREEN);
+    public Topic getCurrentTopic() {
+        return currentTopic;
     }
 
-    // EFFECTS: saves topicManager to data.txt
-    public void save() {
-        try {
-            Saver.save("data.txt", topicManager);
-            System.out.println("saved");
-        } catch (FileNotFoundException e) {
-            System.out.println("File not found");
-        } catch (IOException e) {
-            System.out.println("Error initializing stream");
+    public void setCurrentTopic(Topic currentTopic) {
+        this.currentTopic = currentTopic;
+    }
+
+    // EFFECTS: sets the screen
+    public void setScreen(Screen screen) {
+        root.requestFocus(); // to stop autofocus
+        switch (screen) {
+            case MAIN_SCREEN:
+                root.getChildren().setAll(mainView);
+                break;
+            case TOPIC_SCREEN:
+                root.getChildren().setAll(topicView);
+                topicView.getController().onSwitch();
+                topicView.requestFocus();
+                break;
+            case TESTING_SCREEN:
+                root.getChildren().setAll(testingView);
+                testingView.getController().onSwitch();
+                break;
         }
+    }
+
+    public MainController getMainController() {
+        return mainView.getController();
+    }
+
+    public TopicController getTopicController() {
+        return topicView.getController();
+    }
+
+    public TestingController getTestingController() {
+        return testingView.getController();
     }
 }

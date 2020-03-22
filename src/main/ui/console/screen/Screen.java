@@ -1,7 +1,7 @@
-package ui.screen;
+package ui.console.screen;
 
 import model.TopicManager;
-import ui.App;
+import ui.console.App;
 
 import java.util.Scanner;
 

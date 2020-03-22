@@ -1,9 +1,9 @@
-package ui.screen;
+package ui.console.screen;
 
 import model.FlashCardSet;
 import model.Tester;
-import ui.App;
-import ui.Util;
+import ui.console.App;
+import ui.console.Util;
 
 // screen that allows user to test themselves
 public class TestScreen extends Screen {

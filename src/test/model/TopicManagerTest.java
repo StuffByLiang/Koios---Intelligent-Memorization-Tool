@@ -52,10 +52,20 @@ public class TopicManagerTest {
     }
 
     @Test
-    public void testRemove() {
+    public void testRemoveById() {
         checkSetup();
         topicManager.removeTopic(0);
         assertEquals(2, topicManager.size());
+    }
+
+    @Test
+    public void testRemoveByTopic() {
+        checkSetup();
+        Topic newTopic = new Topic("new topic");
+        topicManager.addTopic(newTopic);
+        assertEquals(4, topicManager.size());
+        topicManager.removeTopic(newTopic);
+        assertEquals(3, topicManager.size());
     }
 
     @Test

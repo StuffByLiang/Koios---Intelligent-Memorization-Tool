@@ -1,6 +1,6 @@
 package model;
 
-import ui.Util;
+import ui.console.Util;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -50,6 +50,14 @@ public class FlashCardSet implements Serializable {
      */
     public void removeFlashCard(int i) {
         flashCardList.remove(i);
+    }
+
+    /* REQUIRES: the list of flash card must contain the flash card
+     * MODIFIES: this
+     * EFFECTS: removes the flash card from the list
+     */
+    public void removeFlashCard(FlashCard flashCard) {
+        flashCardList.remove(flashCard);
     }
 
     // EFFECTS: returns size of the list

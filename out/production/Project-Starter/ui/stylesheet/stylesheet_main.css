@@ -1,0 +1,21 @@
+.scroll-pane {
+    -fx-background-color: transparent;
+    -fx-focus-color: transparent;
+}
+
+.root {
+    -fx-background-color: radial-gradient(radius 100%, rgba(238,174,202,1), rgba(148,187,233,1) );
+    -fx-font-family: 'Montserrat';
+    -fx-text-fill: white;
+}
+
+.jfx-button {
+    -fx-background-color: rgba(0,0,0,0.05), rgba(148,187,233,1);
+    -fx-text-fill: #ffffff;
+    -fx-background-insets: 0,0 0 1 0, 0 0 2 0, 0 0 3 0;
+}
+
+.hyperlink, .hyperlink:visited {
+    -fx-text-fill: #000000;
+    -fx-text-decoration: none;
+}

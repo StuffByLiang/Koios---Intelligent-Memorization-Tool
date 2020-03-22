@@ -88,6 +88,21 @@ public class TesterTest {
     }
 
     @Test
+    public void testGetNumSkipped() {
+        assertEquals(0, tester.getNumSkipped());
+        tester.skip();
+        assertEquals(1, tester.getNumSkipped());
+        assertTrue(tester.isRightAnswer("3"));
+        tester.skip();
+        assertEquals(2, tester.getNumSkipped());
+    }
+
+    @Test
+    public void testGetNumRemaining() {
+        assertEquals(3, tester.getNumRemaining());
+    }
+
+    @Test
     public void testIsFinishedFalse() {
         assertFalse(tester.isFinished());
     }

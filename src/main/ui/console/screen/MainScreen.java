@@ -1,8 +1,8 @@
-package ui.screen;
+package ui.console.screen;
 
 import model.Topic;
-import ui.App;
-import ui.Util;
+import ui.console.App;
+import ui.console.Util;
 
 // main screen the program starts with
 public class MainScreen extends Screen {

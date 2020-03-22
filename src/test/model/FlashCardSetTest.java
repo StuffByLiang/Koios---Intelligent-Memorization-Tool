@@ -58,10 +58,21 @@ public class FlashCardSetTest {
     }
 
     @Test
-    public void testDeleteFlashCard() {
+    public void testDeleteFlashCardById() {
         checkSetup();
         fcl.removeFlashCard(0);
         assertEquals(2, fcl.size());
+    }
+
+    @Test
+    public void testDeleteFlashCard() {
+        checkSetup();
+        FlashCard fc = new FlashCard("1", "2");
+        fcl.addFlashCard(fc);
+        assertEquals(4, fcl.size());
+        fcl.removeFlashCard(fc);
+        assertEquals(3, fcl.size());
+
     }
 
     @Test

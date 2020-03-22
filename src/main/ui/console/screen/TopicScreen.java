@@ -1,10 +1,10 @@
-package ui.screen;
+package ui.console.screen;
 
 import model.FlashCard;
 import model.FlashCardSet;
 import model.Topic;
-import ui.App;
-import ui.Util;
+import ui.console.App;
+import ui.console.Util;
 
 // this screen shows all the actions you can do with a topic
 public class TopicScreen extends Screen {

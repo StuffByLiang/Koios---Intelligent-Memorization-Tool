@@ -66,6 +66,14 @@ public class Tester {
         return totalCards;
     }
 
+    public int getNumSkipped() {
+        return currentFlashCard - numRightAnswers;
+    }
+
+    public int getNumRemaining() {
+        return totalCards - currentFlashCard;
+    }
+
     public int getCurrentFlashCard() {
         return currentFlashCard;
     }

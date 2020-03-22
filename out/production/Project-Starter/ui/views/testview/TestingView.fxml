@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<fx:root maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" stylesheets="@../../stylesheet/stylesheet_main.css" type="AnchorPane" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ui.controllers.TestingController">
+   <children>
+      <VBox alignment="TOP_CENTER" prefHeight="200.0" prefWidth="100.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <StackPane alignment="TOP_CENTER" maxWidth="400.0">
+               <children>
+                  <Label fx:id="titleLabel" text="Topic Test">
+                     <font>
+                        <Font size="24.0" />
+                     </font>
+                     <StackPane.margin>
+                        <Insets bottom="7.0" />
+                     </StackPane.margin>
+                  </Label>
+               </children>
+            </StackPane>
+            <VBox alignment="CENTER" maxWidth="400.0" style="-fx-background-color: white;" VBox.vgrow="ALWAYS">
+               <children>
+                  <StackPane maxWidth="400.0" style="-fx-border-radius: 15; -fx-border-color: black;" VBox.vgrow="ALWAYS">
+                     <opaqueInsets>
+                        <Insets />
+                     </opaqueInsets>
+                     <padding>
+                        <Insets bottom="12.0" left="5.0" right="5.0" top="12.0" />
+                     </padding>
+                     <children>
+                        <Text fx:id="flashCardText" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" textAlignment="CENTER">
+                           <font>
+                              <Font size="22.0" />
+                           </font>
+                        </Text>
+                     </children>
+                  </StackPane>
+                  <StackPane maxWidth="400.0">
+                     <opaqueInsets>
+                        <Insets />
+                     </opaqueInsets>
+                     <padding>
+                        <Insets bottom="4.0" left="5.0" right="5.0" top="4.0" />
+                     </padding>
+                     <children>
+                        <Text fx:id="messageText" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" textAlignment="CENTER">
+                           <font>
+                              <Font size="22.0" />
+                           </font>
+                        </Text>
+                     </children>
+                  </StackPane>
+                  <HBox maxWidth="400.0">
+                     <VBox.margin>
+                        <Insets top="5.0" />
+                     </VBox.margin>
+                     <children>
+                        <JFXTextField fx:id="answerTextField" onAction="#submit" onKeyPressed="#keyTyped" promptText="Answer" HBox.hgrow="ALWAYS">
+                           <font>
+                              <Font size="16.0" />
+                           </font>
+                        </JFXTextField>
+                        <JFXButton minWidth="73.0" onAction="#submit" text="Submit">
+                           <font>
+                              <Font size="16.0" />
+                           </font>
+                           <HBox.margin>
+                              <Insets left="5.0" />
+                           </HBox.margin>
+                        </JFXButton>
+                        <JFXButton minWidth="56.0" onAction="#next" text="Skip">
+                           <font>
+                              <Font size="16.0" />
+                           </font>
+                           <HBox.margin>
+                              <Insets left="5.0" />
+                           </HBox.margin>
+                        </JFXButton>
+                     </children>
+                  </HBox>
+                  <HBox maxWidth="400.0" prefHeight="10.0">
+                     <children>
+                        <AnchorPane fx:id="correctBar" style="-fx-background-color: #4CAF50;" />
+                        <AnchorPane fx:id="incorrectBar" style="-fx-background-color: #F44336;" />
+                        <AnchorPane fx:id="remainingBar" style="-fx-background-color: #BDBDBD;" HBox.hgrow="ALWAYS" />
+                     </children>
+                     <VBox.margin>
+                        <Insets top="15.0" />
+                     </VBox.margin>
+                  </HBox>
+                  <AnchorPane maxWidth="400.0">
+                     <children>
+                        <Label fx:id="correctLabel" text="Label" textFill="#4caf50" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
+                           <font>
+                              <Font size="18.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="incorrectLabel" alignment="CENTER" text="Label" textAlignment="CENTER" textFill="#f44336" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                           <font>
+                              <Font size="18.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="remainingLabel" text="Label" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                           <font>
+                              <Font size="18.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </AnchorPane>
+               </children>
+               <padding>
+                  <Insets bottom="8.0" left="8.0" right="8.0" top="8.0" />
+               </padding>
+            </VBox>
+         </children>
+         <padding>
+            <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+         </padding>
+      </VBox>
+      <JFXButton buttonType="RAISED" onAction="#back" text="Back" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="20.0">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </JFXButton>
+   </children>
+</fx:root>
