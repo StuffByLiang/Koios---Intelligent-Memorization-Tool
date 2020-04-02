@@ -41,6 +41,16 @@ class FlashCardTest {
     }
 
     @Test
+    public void testConstructorWithNullException() {
+        try {
+            fc1 = new FlashCard(null, null);
+            fail("Should have thrown an exception");
+        } catch (InvalidFlashCardException e) {
+            // should throw the execption!
+        }
+    }
+
+    @Test
     public void testConstructorWithTrimAndException() {
         try {
             fc1 = new FlashCard(" ", "     ");
