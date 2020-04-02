@@ -1,4 +1,4 @@
-package ui.components.topictitle;
+package ui.components.topiclistitem;
 
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
@@ -10,12 +10,12 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import model.Topic;
 import ui.App;
-import ui.components.popups.ConfirmPopup;
+import ui.components.popups.confirmpopup.ConfirmPopup;
 
 import java.io.IOException;
 
 // A clickable topic with edit/delete button
-public class TopicTitle extends AnchorPane {
+public class TopicListItem extends AnchorPane {
     private StringProperty name = new SimpleStringProperty();
     private Topic topic;
 
@@ -23,9 +23,9 @@ public class TopicTitle extends AnchorPane {
     private Label nameLabel;
 
     // EFFECTS: Creates a new topic title
-    public TopicTitle(Topic topic) {
+    public TopicListItem(Topic topic) {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("TopicTitle.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("TopicListItem.fxml"));
             loader.setController(this);
             loader.setRoot(this);
             loader.load();
@@ -43,7 +43,7 @@ public class TopicTitle extends AnchorPane {
     void delete(ActionEvent event) {
         ConfirmPopup confirmDeletePopup = new ConfirmPopup((confirm, object) -> {
             if (confirm) {
-                App.get().getTopicManager().removeTopic(topic);
+                App.get().getState().getTopicManager().removeTopic(topic);
                 App.get().getMainController().renderTopics();
             }
             object.close();
@@ -56,7 +56,7 @@ public class TopicTitle extends AnchorPane {
     @FXML
     void handleClick(MouseEvent event) {
         App app = App.get();
-        app.setCurrentTopic(topic);
+        app.getState().setCurrentTopic(topic);
         app.setScreen(App.Screen.TOPIC_SCREEN);
     }
 }

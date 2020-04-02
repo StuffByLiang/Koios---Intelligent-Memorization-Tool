@@ -15,7 +15,7 @@ This project is of interest to me because I find quizlet's progress tracking com
 - As a user, I want to be able to view flashcards in my collection
 - As a user, I want to be able to add/delete/view different topics so I can separate my flash cards.
 
-Phase 2
+## Phase 2
 - As a user, I want to be able to save all topics and flash cards automatically when I quit the program
 - As a user, I want to be able to load all topics and flash cards automatically when I start the program
 
@@ -37,4 +37,21 @@ Phase 2
 7. When finished, it'll play a sound, and display your score.
 8. Click back to go back!
 
-Why u should give me lots of points
+## Phase 4 (Design)
+
+### Task 2
+Test and design a class that is robust.  You must have at least one method that throws a checked exception.  You must have one test for the case where the exception is expected and another where the exception is not expected.
+
+- Class: main.model.FlashCard
+- Test: test.model.FlashCardTest
+- Method: constructor, setFrontSide, setBackSide
+- The change: removed requires clause specifying the given strings must be non empty, so I throw an InvalidFlashCardException if string is null or empty
+- Why: Empty flashcard may not render properly in the UI
+
+### Task 3: Coupling and cohesion analysis
+Upon inspection of the model package, it seems like there's no major issues. Each class is responsible for its own thing, and changes to one class do not propagate undetected in other classes.
+
+Therefore, the following changes will be made to the ui class.
+
+1. The ui.App class is a HUGE class that doesn't satisfy the single responsiblity principle. It manages the view and the state. So, I refactored it by extracting all things related to the State into a seperate class and putting a reference to that class in the App class. This makes more sense; Anything related to the model package should have its own class. Furthermore, if any future developer wants to develop this project further, all they have to do to connect the ui to the model is by editing the State class.
+2. There was semantic coupling in the MainView, TestingView and TopicView classes. A change in one of those classes would mean I would have to change the other classes equally. I fixed this by extracting duplicate code into an Abstract Class called View.

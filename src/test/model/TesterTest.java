@@ -1,5 +1,6 @@
 package model;
 
+import exception.InvalidFlashCardException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -9,7 +10,12 @@ public class TesterTest {
     Tester tester;
 
     private FlashCard createFlashCard(String frontSide, String backSide) {
-        return new FlashCard(frontSide, backSide);
+        try {
+            return new FlashCard(frontSide, backSide);
+        } catch (InvalidFlashCardException e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 
     @BeforeEach

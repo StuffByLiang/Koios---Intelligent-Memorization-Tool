@@ -1,4 +1,4 @@
-package ui.components.flashcard;
+package ui.components.flashcardlistitem;
 
 import com.jfoenix.controls.JFXButton;
 import javafx.event.ActionEvent;
@@ -11,13 +11,13 @@ import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import model.FlashCardSet;
 import ui.App;
-import ui.components.popups.ConfirmPopup;
-import ui.components.popups.EditFlashCardPopup;
+import ui.components.popups.confirmpopup.ConfirmPopup;
+import ui.components.popups.editflashcardpopup.EditFlashCardPopup;
 
 import java.io.IOException;
 
 // FlashCard UI Element that contains a frontside, backside, and a delete/edit button
-public class FlashCard extends HBox {
+public class FlashCardListItem extends HBox {
     private model.FlashCard flashCard;
     private FlashCardSet flashCardSet;
 
@@ -43,9 +43,9 @@ public class FlashCard extends HBox {
     private GridPane gridPane;
 
     // EFFECTS: creates a flash card
-    public FlashCard(FlashCardSet flashCardSet, model.FlashCard flashCard) {
+    public FlashCardListItem(FlashCardSet flashCardSet, model.FlashCard flashCard) {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("FlashCard.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("FlashCardListItem.fxml"));
             loader.setController(this);
             loader.setRoot(this);
             loader.load();

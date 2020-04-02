@@ -1,6 +1,11 @@
 package model;
 
+import exception.InvalidFlashCardException;
+import org.omg.CORBA.DynAnyPackage.Invalid;
+
 import java.io.Serializable;
+
+import static jdk.nashorn.internal.objects.NativeString.trim;
 
 // Represents a flashcard, which has a frontside and a backside
 public class FlashCard implements Serializable {
@@ -8,11 +13,14 @@ public class FlashCard implements Serializable {
     private String frontSide;
     private String backSide;
 
-    // REQUIRES: front side and back side must not be empty
-    // EFFECTS: creates a flash card with a front side and back side
-    public FlashCard(String frontSide, String backSide) {
-        this.frontSide = frontSide;
-        this.backSide = backSide;
+    // EFFECTS: creates a flash card with a front side and back side and removes trailing/leading whitespace.
+    //          if any of the sides after the trim are empty or null, throw an InvalidFlashCardException
+    public FlashCard(String frontSide, String backSide) throws InvalidFlashCardException {
+        if (isInvalidString(frontSide) || isInvalidString(backSide)) {
+            throw new InvalidFlashCardException();
+        }
+        this.frontSide = trim(frontSide);
+        this.backSide = trim(backSide);
     }
 
     public String getFrontSide() {
@@ -23,11 +31,26 @@ public class FlashCard implements Serializable {
         return backSide;
     }
 
-    public void setFrontSide(String frontSide) {
-        this.frontSide = frontSide;
+    // EFFECTS: sets the frontside of the flashcard to the given string and removes trailing/leading whitespace.
+    //          if any of the sides after the trim are empty or null, throw an InvalidFlashCardException
+    public void setFrontSide(String frontSide) throws InvalidFlashCardException {
+        if (isInvalidString(frontSide)) {
+            throw new InvalidFlashCardException();
+        }
+        this.frontSide = trim(frontSide);
     }
 
-    public void setBackSide(String backSide) {
-        this.backSide = backSide;
+    // EFFECTS: sets the backside of the flashcard to the given string and removes trailing/leading whitespace.
+    //          if any of the sides after the trim are empty or null, throw an InvalidFlashCardException
+    public void setBackSide(String backSide) throws InvalidFlashCardException {
+        if (isInvalidString(backSide)) {
+            throw new InvalidFlashCardException();
+        }
+        this.backSide = trim(backSide);
+    }
+
+    // EFFECTS: returns true if the given string is null or the string without trailing/leading whitespace is empty
+    private boolean isInvalidString(String s) {
+        return s == null || trim(s).isEmpty();
     }
 }

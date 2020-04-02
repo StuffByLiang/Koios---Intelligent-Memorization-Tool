@@ -12,16 +12,15 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.VBox;
 import model.Topic;
 import ui.App;
-import ui.components.flashcard.FlashCard;
-import ui.components.popups.AddFlashCardPopup;
+import ui.components.flashcardlistitem.FlashCardListItem;
+import ui.components.popups.addflashcardpopup.AddFlashCardPopup;
 
 import java.net.URL;
 import java.util.ResourceBundle;
 
 // Topic view controller
 public class TopicController implements Initializable {
-    private ObservableList<FlashCard> flashCards = FXCollections.observableArrayList();
-    private Topic topic;
+    private ObservableList<FlashCardListItem> flashCardListItems = FXCollections.observableArrayList();
     private AddFlashCardPopup addFlashCardPopup;
 
     @FXML
@@ -63,18 +62,19 @@ public class TopicController implements Initializable {
 
     // EFFECTS: This code is run when the screen is switched to this
     public void onSwitch() {
-        topic = App.get().getCurrentTopic();
+        Topic topic = App.get().getState().getCurrentTopic();
         titleLabel.setText("Viewing " + topic.getName() + " Set");
         renderFlashCards();
     }
 
     // EFFECTS: renders all flashcards
     public void renderFlashCards() {
-        flashCards.clear();
+        Topic topic = topic = App.get().getState().getCurrentTopic();
+        flashCardListItems.clear();
         for (model.FlashCard flashCard : topic.getFlashCardSet().getFlashCardList()) {
-            flashCards.add(new FlashCard(topic.getFlashCardSet(), flashCard));
+            flashCardListItems.add(new FlashCardListItem(topic.getFlashCardSet(), flashCard));
         }
-        flashcardContainer.getChildren().setAll(flashCards);
+        flashcardContainer.getChildren().setAll(flashCardListItems);
     }
 
     @Override

@@ -19,7 +19,7 @@ public class TestScreen extends Screen {
     @Override
     public void init() {
         super.init();
-        FlashCardSet fcm = app.getTopicManager().getFlashCardManager(app.getTopicId());
+        FlashCardSet fcm = app.getTopicManager().getFlashCardSet(app.getTopicId());
         tester = new Tester(fcm);
     }
 

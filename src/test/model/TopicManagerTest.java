@@ -91,6 +91,6 @@ public class TopicManagerTest {
 
     @Test
     public void testGetFlashCardManager() {
-        assertEquals(0, topicManager.getFlashCardManager(0).size());
+        assertEquals(0, topicManager.getFlashCardSet(0).size());
     }
 }

@@ -21,8 +21,8 @@ public class TopicManager implements Serializable {
     }
 
     // REQUIRES: topic must be in list
-    // EFFECTS: returns the flash card manager for the specified topic id
-    public FlashCardSet getFlashCardManager(int topicId) {
+    // EFFECTS: returns the flash card set for the specified topic id
+    public FlashCardSet getFlashCardSet(int topicId) {
         return getTopic(topicId).getFlashCardSet();
     }
 

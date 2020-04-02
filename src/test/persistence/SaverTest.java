@@ -1,5 +1,6 @@
 package persistence;
 
+import exception.InvalidFlashCardException;
 import model.FlashCard;
 import model.FlashCardSet;
 import model.Topic;
@@ -23,12 +24,16 @@ public class SaverTest {
         FlashCardSet mathFCS = math.getFlashCardSet();
         FlashCardSet bioFCS = biology.getFlashCardSet();
 
-        bioFCS.addFlashCard(new FlashCard("What is the powerhouse of the cell?", "mitochondria"));
-        bioFCS.addFlashCard(new FlashCard("What is the scientific name of humans", "homo sapiens"));
+        try {
+            bioFCS.addFlashCard(new FlashCard("What is the powerhouse of the cell?", "mitochondria"));
+            bioFCS.addFlashCard(new FlashCard("What is the scientific name of humans", "homo sapiens"));
 
-        mathFCS.addFlashCard(new FlashCard("1+1", "2"));
-        mathFCS.addFlashCard(new FlashCard("2+2", "4"));
-        mathFCS.addFlashCard(new FlashCard("4+4", "8"));
+            mathFCS.addFlashCard(new FlashCard("1+1", "2"));
+            mathFCS.addFlashCard(new FlashCard("2+2", "4"));
+            mathFCS.addFlashCard(new FlashCard("4+4", "8"));
+        } catch (InvalidFlashCardException e) {
+            e.printStackTrace();
+        }
 
         topicManager.addTopic(math);
         topicManager.addTopic(biology);

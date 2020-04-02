@@ -1,5 +1,6 @@
 package model;
 
+import exception.InvalidFlashCardException;
 import ui.console.Util;
 
 import java.io.Serializable;
@@ -33,12 +34,11 @@ public class FlashCardSet implements Serializable {
         return flashCardList.get(i);
     }
 
-    /* REQUIRES: the list of flash card must contain the flash card,
-                 and frontSide and backSide must not be empty strings
+    /* REQUIRES: the list of flash card must contain the flash card
      * MODIFIES: this ???
      * EFFECTS: updates a flash card in the list at pos i
      */
-    public void updateFlashCard(int i, String frontSide, String backSide) {
+    public void updateFlashCard(int i, String frontSide, String backSide) throws InvalidFlashCardException {
         FlashCard flashCard = getFlashCard(i);
         flashCard.setFrontSide(frontSide);
         flashCard.setBackSide(backSide);

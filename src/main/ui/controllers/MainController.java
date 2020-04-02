@@ -9,9 +9,9 @@ import javafx.scene.layout.VBox;
 import model.Topic;
 import model.TopicManager;
 import ui.App;
-import ui.components.popups.MessagePopup;
-import ui.components.topictitle.TopicTitle;
-import ui.components.popups.NewTopicPopup;
+import ui.components.popups.messagepopup.MessagePopup;
+import ui.components.topiclistitem.TopicListItem;
+import ui.components.popups.newtopicpopup.NewTopicPopup;
 
 import java.net.URL;
 import java.util.List;
@@ -19,8 +19,8 @@ import java.util.ResourceBundle;
 
 // Main Screen Controller
 public class MainController implements Initializable {
-    private ObservableList<TopicTitle> topicComponents = FXCollections.observableArrayList();
-    private NewTopicPopup addTopicPopup;
+    private ObservableList<TopicListItem> topicListItems = FXCollections.observableArrayList();
+    private NewTopicPopup newTopicPopup;
 
     @FXML
     private VBox setContainer;
@@ -28,36 +28,36 @@ public class MainController implements Initializable {
     // EFFECTS: opens up the new set popup
     @FXML
     void newSet(ActionEvent event) {
-        addTopicPopup.show();
+        newTopicPopup.show();
     }
 
     // EFFECTS: saves all flashcards
     @FXML
     void save(ActionEvent event) {
-        String result = App.get().saveTopicManager();
+        String result = App.get().getState().save();
         new MessagePopup(result).show();
     }
 
     // EFFECTS: loads saved flashcards
     @FXML
     void load(ActionEvent event) {
-        String result = App.get().loadTopicManager();
+        String result = App.get().getState().load();
         new MessagePopup(result).show();
     }
 
     // EFFECTS: displays topics
     public void renderTopics() {
         try {
-            TopicManager topicManager = App.get().getTopicManager();
+            TopicManager topicManager = App.get().getState().getTopicManager();
             List<Topic> topicList = topicManager.getTopicList();
 
-            topicComponents.clear();
+            topicListItems.clear();
 
             for (Topic topic : topicList) {
-                topicComponents.add(new TopicTitle(topic));
+                topicListItems.add(new TopicListItem(topic));
             }
 
-            setContainer.getChildren().setAll(topicComponents);
+            setContainer.getChildren().setAll(topicListItems);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -65,7 +65,7 @@ public class MainController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        addTopicPopup = new NewTopicPopup(this);
+        newTopicPopup = new NewTopicPopup(this);
         renderTopics();
     }
 }

@@ -1,5 +1,6 @@
 package ui.console.screen;
 
+import exception.InvalidFlashCardException;
 import model.FlashCard;
 import model.FlashCardSet;
 import model.Topic;
@@ -22,7 +23,7 @@ public class TopicScreen extends Screen {
 
     // EFFECTS: gets the current flash card manager for the current topic
     private FlashCardSet getFlashCardManager() {
-        return topicManager.getFlashCardManager(app.getTopicId());
+        return topicManager.getFlashCardSet(app.getTopicId());
     }
 
     // EFFECTS: displays the topic menu
@@ -78,7 +79,11 @@ public class TopicScreen extends Screen {
         String backSide = input.nextLine();
 
         FlashCardSet flashCardSet = getFlashCardManager();
-        flashCardSet.addFlashCard(new FlashCard(frontSide, backSide));
+        try {
+            flashCardSet.addFlashCard(new FlashCard(frontSide, backSide));
+        } catch (InvalidFlashCardException e) {
+            System.out.println("Cannot create empty flashcard!!!");
+        }
     }
 
     // MODIFIES: this

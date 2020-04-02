@@ -123,7 +123,7 @@ public class TestingController implements Initializable {
 
     // EFFECTS: this code runs when the screen is switched to this
     public void onSwitch() {
-        topic = App.get().getCurrentTopic();
+        topic = App.get().getState().getCurrentTopic();
         titleLabel.setText(topic.getName() + " Test");
 
         beginTest();

@@ -1,5 +1,6 @@
 package model;
 
+import exception.InvalidFlashCardException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -9,7 +10,12 @@ public class FlashCardSetTest {
     FlashCardSet fcl;
 
     private FlashCard createFlashCard(String frontSide, String backSide) {
-        return new FlashCard(frontSide, backSide);
+        try {
+            return new FlashCard(frontSide, backSide);
+        } catch (InvalidFlashCardException e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 
     private void checkSetup() {
@@ -52,7 +58,11 @@ public class FlashCardSetTest {
     @Test
     public void testUpdateFlashCard() {
         checkSetup();
-        fcl.updateFlashCard(1,"2+2", "4");
+        try {
+            fcl.updateFlashCard(1, "2+2", "4");
+        } catch (InvalidFlashCardException e) {
+            e.printStackTrace();
+        }
         assertEquals(3, fcl.size());
         checkFlashCard(fcl.getFlashCard(1), "2+2", "4");
     }
@@ -67,7 +77,7 @@ public class FlashCardSetTest {
     @Test
     public void testDeleteFlashCard() {
         checkSetup();
-        FlashCard fc = new FlashCard("1", "2");
+        FlashCard fc = createFlashCard("1", "2");
         fcl.addFlashCard(fc);
         assertEquals(4, fcl.size());
         fcl.removeFlashCard(fc);

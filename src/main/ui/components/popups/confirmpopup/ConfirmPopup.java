@@ -1,7 +1,8 @@
-package ui.components.popups;
+package ui.components.popups.confirmpopup;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import ui.components.popups.Popup;
 
 import java.util.function.BiFunction;
 

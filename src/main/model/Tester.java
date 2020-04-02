@@ -2,17 +2,17 @@ package model;
 
 // represents a class that can contains information needed to remember a testing session
 public class Tester {
-    private FlashCardSet fcm;
+    private FlashCardSet fcs;
     private int currentFlashCard;
     private int numRightAnswers;
     private int totalCards;
 
     // EFFECTS: constructs a new tester with a specified set of flash cards
-    public Tester(FlashCardSet fcm) {
-        this.fcm = fcm;
+    public Tester(FlashCardSet fcs) {
+        this.fcs = fcs;
         currentFlashCard = 0;
         numRightAnswers = 0;
-        totalCards = fcm.size();
+        totalCards = fcs.size();
     }
 
     // REQUIRES: currentFlashCard < totalCards
@@ -45,17 +45,17 @@ public class Tester {
 
     // EFFECTS: returns true if the current flash card is the last card.
     public boolean isLastCard() {
-        return currentFlashCard == fcm.size() - 1;
+        return currentFlashCard == fcs.size() - 1;
     }
 
     // EFFECTS: returns the backSide of the current flash card
     public String getBackSide() {
-        return fcm.getFlashCard(currentFlashCard).getBackSide();
+        return fcs.getFlashCard(currentFlashCard).getBackSide();
     }
 
     // EFFECTS: returns the frontSide of the current flash card
     public String getFrontSide() {
-        return fcm.getFlashCard(currentFlashCard).getFrontSide();
+        return fcs.getFlashCard(currentFlashCard).getFrontSide();
     }
 
     public int getNumRightAnswers() {

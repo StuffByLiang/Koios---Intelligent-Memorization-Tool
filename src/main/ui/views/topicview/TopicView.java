@@ -3,30 +3,19 @@ package ui.views.topicview;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.StackPane;
+import ui.controllers.TestingController;
 import ui.controllers.TopicController;
+import ui.views.View;
 
 import java.io.IOException;
 
 // Topic View Component, displays a topic and actions for its flashcards
-public class TopicView extends AnchorPane {
-    private TopicController controller;
-
+public class TopicView extends View {
     public TopicView(StackPane root) {
-        try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("TopicView.fxml"));
-            loader.setRoot(this);
-            loader.load();
-
-            controller = loader.getController();
-
-            this.prefWidthProperty().bind(root.widthProperty());
-            this.prefHeightProperty().bind(root.heightProperty());
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        super(root, "TopicView.fxml");
     }
 
     public TopicController getController() {
-        return controller;
+        return (TopicController) controller;
     }
 }

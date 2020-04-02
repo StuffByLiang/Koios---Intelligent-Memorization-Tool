@@ -1,10 +1,9 @@
-package ui.components.popups;
+package ui.components.popups.messagepopup;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
-
-import java.util.function.BiFunction;
+import ui.components.popups.Popup;
 
 // A popup that can display a given message
 public class MessagePopup extends Popup {

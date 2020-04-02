@@ -5,7 +5,6 @@ import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 import model.Topic;
 import model.TopicManager;
-import persistence.Saver;
 import ui.controllers.MainController;
 import ui.controllers.TestingController;
 import ui.controllers.TopicController;
@@ -13,8 +12,6 @@ import ui.views.mainview.MainView;
 import ui.views.testview.TestingView;
 import ui.views.topicview.TopicView;
 
-import java.io.FileNotFoundException;
-import java.io.IOException;
 import java.net.URL;
 
 // Manages the app
@@ -32,8 +29,7 @@ public class App {
     private TopicView topicView;
     private TestingView testingView;
 
-    private TopicManager topicManager;
-    private Topic currentTopic;
+    private State state;
 
     public enum Screen {
         MAIN_SCREEN,
@@ -84,54 +80,12 @@ public class App {
     // EFFECTS: creates a new app
     private App(Stage stage) {
         this.stage = stage;
-        topicManager = new TopicManager();
+        this.state = new State(this);
+        state.setTopicManager(new TopicManager());
     }
 
-    // MODIFIES: this
-    // EFFECTS: loads topicManager from data.txt, and returns result message
-    public String loadTopicManager() {
-        try {
-            topicManager = Saver.load("data.txt");
-            if (currentTopic != null) {
-                getTopicController().renderFlashCards();
-            }
-            getMainController().renderTopics();
-            return "Successfully Loaded!";
-        } catch (FileNotFoundException e) {
-            return "Error: File not found";
-        } catch (IOException e) {
-            return "Error: Problem initializing stream";
-        } catch (ClassNotFoundException e) {
-            return "Error: Class was not found";
-        }
-    }
-
-    // EFFECTS: saves topicManager to data.txt, and returns result message
-    public String saveTopicManager() {
-        try {
-            Saver.save("data.txt", topicManager);
-            return "Successfully Saved!";
-        } catch (FileNotFoundException e) {
-            return "Error: File not found";
-        } catch (IOException e) {
-            return "Error: Problem initializing stream";
-        }
-    }
-
-    public TopicManager getTopicManager() {
-        return topicManager;
-    }
-
-    public void setTopicManager(TopicManager topicManager) {
-        this.topicManager = topicManager;
-    }
-
-    public Topic getCurrentTopic() {
-        return currentTopic;
-    }
-
-    public void setCurrentTopic(Topic currentTopic) {
-        this.currentTopic = currentTopic;
+    public State getState() {
+        return state;
     }
 
     // EFFECTS: sets the screen
